@@ -1,0 +1,14 @@
+1 weapon_crowbar
+2 weapon_9mmhandgun
+3 weapon_357
+4 weapon_9mmAR
+6 weapon_crossbow
+7 weapon_shotgun
+8 weapon_rpg
+9 weapon_gauss
+10 weapon_egon
+11 weapon_hornetgun
+12 weapon_handgrenade
+13 weapon_tripmine
+14 weapon_satchel
+15 weapon_snark

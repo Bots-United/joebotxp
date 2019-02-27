@@ -1,0 +1,43 @@
+#
+# HPB_bot makefile for Borland C++ 5.5
+#
+# created: 12/16/2000 botman (botman@mailandnews.com)
+#
+
+CPP = bcc32 -w- -4
+
+# uncomment the next line to turn on debugging information
+#DEBUG = -v
+
+# the following specifies the path to your MOD...
+MOD_DIR = D:\Half-Life\tfc
+
+INCLUDES = -I../engine -I../common -I../pm_shared -I../NNSim -I../NNSim/SOM -IC:/Borland/BCC55/Include
+
+OBJ = bot.obj bot_cs.obj CBotBase.obj CBotCS.obj CBotCS_navigate.obj CBotCS_combat.obj CBotDOD.obj \
+	CBotDOD_navigate.obj CBotDOD_combat.obj bot_client.obj bot_names.obj bot_chat.obj dll.obj engine.obj \
+	h_export.obj util.obj waypoint.obj nn.obj nnweapon.obj ..\NNSim\SOM\CqSOM2d.obj \
+	..\NNSim\SOM\nVec.obj ..\NNSim\SOM\fNBorKernel.obj ..\NNSim\SOM\SOMPattern.obj \
+	..\NNSim\SOM\SOMPatternElem.obj CParser.obj bot_wpdir.obj bot_wpstat.obj CLTMem.obj CSTMem.obj \
+	CSkill.obj waypoint_advdataimpl.obj CState.obj CRadio.obj CPersonality.obj CTask.obj
+
+
+joebot.dll:	${OBJ} linkfunc.obj
+	ilink32 -c -aa -q -Gn -Tpd -m ${DEBUG} c0d32.obj ${OBJ} \
+	linkfunc.obj, $@, joebot.map, import32.lib cw32mt.lib, \
+	joebot_borland.def
+
+linkfunc.obj:	linkfunc.cpp
+	${CPP} ${DEBUG} ${INCLUDES} -u- -o$@ -c linkfunc.cpp
+
+clean:
+	-del *.obj
+	-del *.dll
+	-del *.map
+	-del *.tds
+
+.cpp.obj:
+	${CPP} ${DEBUG} ${INCLUDES} -o$@ -c $<
+
+.c.obj:
+	${CPP} ${DEBUG} ${INCLUDES} -o$@ -c $<

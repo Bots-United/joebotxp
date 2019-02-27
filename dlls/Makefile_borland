@@ -1,0 +1,50 @@
+#
+# joebot makefile for Borland C++ 5.5
+#
+
+CPP = bcc32 -w- -5 -O2
+
+# uncomment the next line to turn on debugging information
+#DEBUG = -v
+
+# the following specifies the path to your MOD...
+
+
+INCLUDES = -I..\engine -I..\common -I..\pm_shared -I..\NNSim -I..\NNSim\Som
+
+OBJ = bot.obj bot_cs.obj CBotBase.obj CBotCS.obj CBotCS_navigate.obj CBotCS_combat.obj CBotDOD.obj CBotDOD_navigate.obj \
+CBotDOD_combat.obj bot_client.obj bot_names.obj Chat.obj ChatHost.obj ChatHostData.obj ChatBot.obj dll.obj engine.obj h_export.obj linkfunc.obj util.obj \
+waypoint.obj nnweapon.obj ..\NNSim\SOM\CqSOM2d.obj ..\NNSim\SOM\nVec.obj ..\NNSim\SOM\fNBorKernel.obj \
+..\NNSim\SOM\SOMPattern.obj ..\NNSim\SOM\SOMPatternElem.obj CParser.obj bot_wpdir.obj bot_wpstat.obj CLTMem.obj \
+CSTMem.obj CSkill.obj waypoint_advdataimpl.obj CState.obj CRadio.obj CPersonality.obj CTask.obj Commandfunc.obj \
+CCommand.obj CSDecals.obj basemem.obj ..\NNSim\Activations.obj ..\NNSim\BaseLink.obj ..\NNSim\BaseLinkFF.obj \
+..\NNSim\BaseNeuralNet.obj ..\NNSim\BaseNeuralNetFF.obj ..\NNSim\BaseNeuron.obj ..\NNSim\BaseNeuronFF.obj \
+..\NNSim\BasePattern.obj ..\NNSim\BasePatternElem.obj ..\NNSim\BasePatternElemFF.obj ..\NNSim\BasePatternFF.obj \
+..\NNSim\BaseWeight.obj ..\NNSim\BaseWeightFF.obj ..\NNSim\LinkBProp.obj ..\NNSim\LinkBPropM.obj \
+..\NNSim\NeuralNetBProp.obj ..\NNSim\NeuralNetBPropM.obj ..\NNSim\NeuronBProp.obj ..\NNSim\NeuronBPropM.obj \
+ ..\NNSim\NNSimService.obj ..\NNSim\PatternBProp.obj ..\NNSim\PatternElemBProp.obj ..\NNSim\WeightBProp.obj \
+..\NNSim\WeightBPropM.obj ..\NNSim\GenomToken.obj ..\NNSim\Genom.obj Gnome.obj WorldGnome.obj LListElem.obj
+
+
+joebot.dll:	${OBJ} linkfunc.obj
+	ilink32 -c -aa -q -Gn -Tpd -m ${DEBUG} c0d32.obj ${OBJ} \
+	linkfunc.obj, $@, joebot.map, import32.lib cw32mt.lib, \
+	joebot_borland.def
+
+	copy joebot.dll c:\spiele\half-l~1\joebot\joebot.dll
+
+linkfunc.obj:	linkfunc.cpp
+	${CPP} ${DEBUG} ${INCLUDES} -u- -o$@ -c linkfunc.cpp
+
+clean:
+	-del *.obj
+	-del *.dll
+	-del *.map
+	-del *.tds
+
+.cpp.obj:
+	${CPP} ${DEBUG} ${INCLUDES} -o$@ -c $<
+
+.c.obj:
+	${CPP} ${DEBUG} ${INCLUDES} -o$@ -c $<
+

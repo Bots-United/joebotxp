@@ -1,0 +1,141 @@
+<html>
+	<title>JoeBOT XP Dev notes</title>
+	<body>
+		<table border="1">
+			<tr>
+				<th colspan="3">
+					joebot xp development notes :
+					<tr>
+						<td>
+						Date<td>
+						DONE<td>
+					text
+					<tr>
+						<td>
+						<td>
+						<td>
+							<pre>
+struct wpsituation
+long firepower;				// own firepower to this spot
+int teamm8count;			// own players seeing this spot ( dont take FOV into account, just the vistable data )
+long enemyfirepower;		// enemy firepower to this spot
+int enemycount;				// enemies seeing this spot
+</pre>
+					<tr>
+						<td>
+						<td>
+						<td>
+					irgendwie das mit reinbringen, dass wenn ein task gerade erst ausgeführt wurde, 
+					dass dann erstmal danach bei nachfolgenden goal inserts die prioritaet 
+					automatisch niedriger ist
+					<tr>
+						<td>
+						<td>
+						done<td>
+					squad sys mehr blackboard maeßig. bei verhaltensweisen kein direkter umgang mit 
+					ASTarmachines mehr, sondern nur noch spielerspezifische variablen, die bspw. 
+					angeben wo das squad den bot hinhaben will. evtl. AStarMachine dinge werden 
+					dann nur noch vom squad übernommen. hier kann so gleich die koordination der 
+					wege mit vorgenommen werden, das alte coord sys ist somit hinfaellig.
+					<tr>
+						<td>
+						<td>
+						done<td>
+					to avoid that bots want to pick up a weapon at the same time, and then throw 
+					away their weapons, only one of them gets theirs and most of them will just 
+					have to get their weapon back, I thought of some "resource reservation" system 
+					: A bot might wanna reserve a special right for some time. This might be the 
+					right to pick up a weapon. The related behaviours have to check back if they 
+					can get this right, if not, they have to cancel their attempt. This should 
+					maybe added as a separate class, to make things nicely OO, since it might be 
+					used at several places, in squads at least, dunno whereelse Perceipts should be 
+					freed on a bot's death - done
+					<tr>
+						<td>
+						<td>
+						done<td>
+							<pre>
+_int64 rdtsc_value; 
+__asm 
+{ 
+rdtsc 
+mov dword ptr [rdtsc_value],eax 
+mov dword ptr [rdtsc_value+4],edx 
+} 
+</pre>
+					<tr>
+						<td>
+						<td>
+						<td>
+					<tr>
+						<td>
+						<td>
+						<td>
+					vielleicht mal n flag in waypoint graph was per default false ist. wird dann 
+					auf true gesetzt, wenn man mehr als 500 wps hat, oder bspw. vom TE zum CT spawn 
+					kommt, bzw man einen wp inner mitte findet von dem man zu beiden kommt oder den 
+					man von beiden erreichen kann.
+					<tr>
+						<td>
+						<td>
+						done<td>
+					somehow we also gotta put the position in the profiler tree to the html output 
+					files
+					<tr>
+						<td>
+						<td>
+						done<td>
+					Perception System In a game with 16 bots, we usually have 700-1300 Perceipt 
+					instances. maybe we should consider using a MemPool there as well when we wanna 
+					lower the CPU usage- do we really need this ?! - not really since the current 
+					system is perfectly running smooth on a celeron 466, who needs more ?!
+					<tr>
+						<td>
+						<td>
+						done<td>
+					bots who are alone in a squad should join another squad
+					<tr>
+						<td>
+						<td>
+						<td>
+					there are probs with the paths and adding diff stuff
+					<tr>
+						<td>
+						2004, Oct
+						<td>
+						<td>
+							maybe there should be some list of 'enemy spotted' events for each time to give 
+							more importance to certain waypoints in the LookTo behaviours</td>
+					<tr>
+						<td>
+						<td>
+						<td>Idea about tasks for squads : some blackboard on team AI level may contain 
+							pointers to behaviours which the squad may acquire. there is also the need for 
+							some priority system, like with the other behaviours, but this should be for 
+							multible squads, not just for a single squad for itself.<br>
+					i.e. a system like in the bot, but the goals are from different 'thinkers' and 
+					different 'behaviours' and the winner is attached to its 'thinker'
+					<tr>
+						<td>
+						<td>
+						<td>
+							<P>The CBaseTeam has no a list of behaviours for the squads<BR>
+								points to think about :<ul>
+									<li>
+									how to use the goalfinder inside CBaseTeam<li>how to attach the behaviours to 
+									the right squad<li>how to execute the evaluate functions of that behaviours ... we 
+										need to simulate that the behaviour is part of some squad</li></ul>
+								<UL>
+								</UL>
+							<P></P>
+						</td>
+					</tr>
+					<tr>
+						<td>
+						<td>
+						<td>convert <EM>CheckVecThrow</EM> and <EM>CheckVecToss</EM> to CGame structure as 
+							well as <EM>traceline</EM>&nbsp;to Map or to game</td>
+					</tr>
+		</table>
+	</body>
+</html>

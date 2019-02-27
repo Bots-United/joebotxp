@@ -1,0 +1,68 @@
+#pragma once
+#ifndef __CFRAMETIMER_HPP
+#define __CFRAMETIMER_HPP
+
+typedef unsigned __int64 UINT64;
+
+//#include <d3d.h>
+//#include <d3dx.h>
+#include <windows.h>
+#include <mmsystem.h>
+
+class CFrameTimer
+{
+public:
+    CFrameTimer();
+
+    void Start(float fFramesPerSec);
+    void Frame();
+
+    float GetFramesPerSec();
+    float GetSecsPerFrame();
+
+    UINT64 GetTicks();
+    UINT64 GetTicksPerSec();
+    UINT64 GetTicksPerFrame();
+
+//protected:
+    float m_fTicksPerSec;
+    float m_fFramesPerSec;
+    float m_fSecsPerFrame;
+
+    UINT64 m_qwTicks;
+    UINT64 m_qwTicksPerSec;
+    UINT64 m_qwTicksPerFrame;
+};
+
+
+
+//////////////////////////////////////////////////////////////////////////////
+// Inline methods ////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+
+inline float
+CFrameTimer::GetFramesPerSec()
+{
+    return m_fFramesPerSec;
+}
+
+inline float
+CFrameTimer::GetSecsPerFrame()
+{
+    return m_fSecsPerFrame;
+}
+
+inline UINT64
+CFrameTimer::GetTicksPerSec()
+{
+    return m_qwTicksPerSec;
+}
+
+inline UINT64
+CFrameTimer::GetTicksPerFrame()
+{
+    return m_qwTicksPerFrame;
+}
+
+
+#endif __CFRAMETIMER_HPP

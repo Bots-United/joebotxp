@@ -1,0 +1,24 @@
+CPP = g++
+BASEFLAGS = -Dstricmp=strcasecmp -Dstrcmpi=strcasecmp
+CPPFLAGS = ${BASEFLAGS} -m486 -w -I../engine -I../common -I../pm_shared -I../NNSim/ -I../NNSim/som/ -fno-inline -fforce-addr -fforce-mem -fexpensive-optimizations
+
+OBJ = bot.o bot_cs.o CBotBase.o CBotCS.o CBotCS_navigate.o CBotCS_combat.o CBotDOD.o CBotDOD_navigate.o CBotDOD_combat.o bot_client.o bot_names.o dll.o engine.o h_export.o linkfunc.o util.o waypoint.o NNWeapon.o ../NNSim/som/CqSOM2d.o ../NNSim/som/nVec.o ../NNSim/som/fNBorKernel.o ../NNSim/som/SOMPattern.o ../NNSim/som/SOMPatternElem.o CParser.o bot_wpdir.o bot_wpstat.o CLTMem.o CSTMem.o CSkill.o waypoint_advdataimpl.o CState.o CRadio.o CPersonality.o CTask.o Commandfunc.o CCommand.o CSDecals.o basemem.o ../NNSim/Activations.o ../NNSim/BaseLink.o ../NNSim/BaseLinkFF.o ../NNSim/BaseNeuralNet.o ../NNSim/BaseNeuralNetFF.o ../NNSim/BaseNeuron.o ../NNSim/BaseNeuronFF.o ../NNSim/BasePattern.o ../NNSim/BasePatternElem.o ../NNSim/BasePatternElemFF.o ../NNSim/BasePatternFF.o ../NNSim/BaseWeight.o ../NNSim/BaseWeightFF.o ../NNSim/LinkBProp.o ../NNSim/LinkBPropM.o ../NNSim/NeuralNetBProp.o ../NNSim/NeuralNetBPropM.o ../NNSim/NeuronBProp.o ../NNSim/NeuronBPropM.o  ../NNSim/NNSimService.o ../NNSim/PatternBProp.o ../NNSim/PatternElemBProp.o ../NNSim/WeightBProp.o ../NNSim/WeightBPropM.o Gnome.o WorldGnome.o LListElem.o Chat.o ChatBot.o ChatHost.o ChatHostData.o
+
+joebot.so: ${OBJ}
+	${CPP} -fPIC -shared -o $@ ${OBJ} -ldl -lstdc++
+	cp joebot.so /home/joe/hlds_l/joebot/ -fv
+	gzip -fv --best joebot.so
+
+clean:
+	-rm -fv *.o
+	-rm -fv *.so	
+	-rm -fv *.so.gz
+	-rm -fv ../NNSim/*.o
+	-rm -fv ../NNSim/som/*.o
+
+%.o:	%.cpp
+	${CPP} ${CPPFLAGS} -c $< -o $@
+
+%.o:	%.c
+	${CPP} ${CPPFLAGS} -c $< -o $@
+

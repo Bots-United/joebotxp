@@ -1,0 +1,228 @@
+11 july 2002
+			- ripping down old joebot
+			- wrote parts of the waypoint system
+
+12 july 2002
+			- extended wp sys, dynamic vis table
+			- load and save function for waypoints ( wp + vis table )
+			- movement interface for bots
+
+13 july 2002
+			- start of
+				- Player class interface
+				- Map class interface
+				- Game class interface
+
+14 july 2002
+			- fixed some bugs in the path system
+			- improved display of waypoints
+			- WPStat class ( collecting 'experiences' )
+			- aequivalent to clients[32] of botmans template added to Game class
+
+16 july 2002
+			- general system for 'interesting' entities
+			- HLDM game class basically written
+
+18 july 2002
+			- the first bots are alive !
+				- they just stand still, but that's not bad :D
+			- fixed some bugs in the client message functions
+
+19 july 2002
+			- astar algorithm done - at least the basis ;D ( compiles fine, but's not tested )
+			- it's working :D
+
+20 july 2002
+			- debugged astar
+			- started observerclass
+
+21 july 2002
+			- debugged astar
+			- continued work on observerclass
+
+22 july 2002
+			- debugged the paths system :(
+			- continued work on observerclass
+
+26 july 2002
+			- still debugging astar ... found e.g. some bugs in the hashtable of the open/closed lists
+			- optimizing observation
+			- ladders are automatically prewaypointed
+
+1 august 2002
+			- converted external waypoint viewer to new wp sys
+			- extended waypoint viewer to test AStar
+			- worked on autowaypointing
+
+3 august 2002
+			- basic perception system
+
+4 august 2002
+			- perception of players, entities
+
+5 august 2002
+			- perception of faked sounds like movements and shooting
+
+15 august 2002
+			- ( huh, quite lazy writing comments about the progress, bad boy @$3.1415rin ;) )
+			- wrote goal system
+			- wrote goalfinder ( 3 parallel tasks possible - look, move, action )
+			- debugged the bot creation process in relation to the game class
+			- extended the perception system
+			- they respawn after map change
+
+16 august 2002
+			- wrote basic ladder handling
+
+22 august 2002
+			- extended perception system
+			- added some behaviours for testing, e.g. watching the enemy, hearing etc.
+
+6 september 2002
+			- still optmizing A* ( all times are average values on one testing waypoint file )
+			- - memory pool for nodes ( 740 -> 655 us )
+			- - removed some redundant code ( 655 -> 635 us )
+			- - fixed bug in updateParents ( 635 -> 310 us )
+
+14 september 2002
+			- continued optimizing A*
+			- - about 10% faster because the priority with hash table is now a class for it's own, not derived from the template queue
+			- - wrote an AStarTaskManager for the bot
+
+1? september 2002
+			- basic compatability for cs and dod
+			- - menu handling for both mods ( for dod, that was a lot of work :D )
+			- - team detection for cstrike ( models instead of v.team )
+
+22 september 2002
+			- wrote management system for move paths ( no need to switch move tasks each second :D )
+			- wrote a lot more debugging stuff
+			- - custom hldm client dll
+			- - more information, goal priorities e.g. are displayed
+
+23 september 2002
+			- wrote some behaviours
+			- - unstuck
+			- - waypoint reach timeout
+			- - heading to healthpacks if needed
+
+25 september 2002
+			- added some client message functions
+
+somewhen in between
+			- reorganized follow path behaviour
+			- one more goal type
+
+29 september 2002
+			- improved wpviewer
+			- different names
+
+1 october 2002
+			- weapon pickup system
+
+[in between]
+			- back from quadro to triple task system
+			- less cpu intensive perception
+			- and a lot of fixes and tweaks
+
+13 october 2002
+			- wrote explore behaviour, so bots can run around without waypoints while creating some
+
+			- extending exploring
+
+17 october 2002
+			- average distance to/number of visible waypoints added to CWaypoint ( WPV++ )
+			- damage and damaged field for WPStatItems	( WPSV++ )
+			- damage of human players is recorded as well ( big bug in old joebot :) )
+			- made wpviewer compatible
+
+20 october 2002
+			- attack behaviours for bots
+			- some experiments with bsp like tree structures for speeding up waypoint search
+
+30 october 2002
+			- hashtable for finding nearest waypoint
+
+[...] ouh, worked not much and joebot xp and even if, no progress reports ...
+
+29 december 2002
+			- again 10 percent better A* performance
+			- optimized response-curve class
+			- some 'beauty'-changes :D
+			- added lots of comments
+
+25 february 2003
+			- another cool AStarMachine Plugin :D -> to determine possible positions an enemy might have fled to
+			- removed distinction between perceptive and nonperceptive behaviours : all are in the same list, but they can 'decide' which perceptions to process in advance.
+			- the bot has a long term memory ( 0-30s ) between the short term mem ( -2s ) and the statistical waypoint related experience data
+			- added a bit of anticipation ( CBVLT_HLDM_AttackFollow ) ( this time without cheating :) )
+			- improved BitField class -> no more ( known *g* ) reasons to crash
+			- waypointGraph class extended to be able to produce bitfields representing states of waypoints, to be easily combinable via bool's operators
+			- william noticed that the A* with the updateParents function from generation5 is a bit slow ... and well, like always, he was right, reinserting nodes to the open list from the closed list is about 10% faster
+			- the current internal situation of the bot can be dumped to a text file ... what a nice debugging tool
+			- the profiler class works fine now
+			- no more eternal camping
+
+22 march 2003
+			- more precise time measuring based on cpu cycles ( thx to william )
+			- - more precise profiler
+			
+24 may 2003
+			- automatic flagging of target waypoints coded
+			- - in CS this are bomb targets and hostage rescue zone ... wtf doesnt this work on cs_assault but on cs_siege ?! huh, gotta sleep first
+			
+			- teams may now have some shared memory, for looking around, for team message coordination, for squad coordination.
+			   internal team communication should be 'visualized' as far as possible by radio commands and text messages
+			
+12 june 2003
+			- some structural changes preparing joebotxp for squad-level AI
+			
+17 august 2003
+			- added cohesion behaviour to squad bvs
+			- added avoidance to squad bvs
+			
+13 sept 2003
+			- found bug connecting wrong waypoints in autowaypointer
+			
+January 2004
+			- restructured class structure. bots are now derived from players and do not only contain a pointer. First time I used virtual base classes in some reasonable way
+			- had to fix a lot of bugs due to restructuring
+			- improved squad behaviours
+			- paths
+			- - added an iterator class for paths
+			- - pathfinder now uses iterator class instead of accessing the paths directly. by passing the iterator to functions, there is no speed loss for path related data any more. the overall speed loss is negligable
+			- - added failed information for paths and modified the pathfinding stuff accordingly
+			- fixed bug in one of the copy functions of the beloved bitfield class - partial copy was overwriting m_lBits
+			- XML output of waypoint data
+
+February 2004
+			- fixed TK avoidance
+			- fixed getting stuck due to no realization that no path was found
+			- improved hearing of nearby impacts of bullets ... ( faked, no tracelines due to performance )
+			
+March 2004
+			- bots are blinded by flashbangs
+			- waypoint version moved to 6
+			- - failed information is now stored for each path, too
+			- fixed bug in perception : forgot to remove CPerceipt::PTX_INVALID perceipts
+
+April 2004
+			- Added file output to profiler. A folder called 'profiler' is needed herefore
+			- Improved Squad Coordination
+			- - pathfinding might have some penalty for paths occupied by other squadmembers
+			- - Squad BVs don't have to take care about AStarMachines, but they can
+			- fixed bug with CCallback_OnPathCreation - tasks are removed on destruction of behaviours, squads
+			- cohesion behavior now also takes type of weapon into account - an awp carrying bot should better be at the back of the squad
+
+June 2004
+			- fixed cohesion of squads
+			- added a permission system to the team and squad level. This should, if explicitly wanted, prevent bots in the same team / squad to run certain same behaviours at a time. a whole squad of bots running to pickup an AWP wasnt looking nice
+			
+September 2004
+			- added additional parameter to debugMsg and drawBeam to allow selection of debug item during runtime
+			- - adapted each of those function calls
+			- - added command "debug"
+			- - - "debug engine" is the old debug_engine
+			- - - "debug beam" for deciding which beams to display
+			- - - "debug msg" for deciding which msgs to display
+			- finally found bug which prevented bots who are alone in a squad from joining another squad

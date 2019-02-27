@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 7.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SG2_3D", "wpStat3D.vcproj", "{A2E31074-9C2F-4484-A2C4-06A29B4306D0}"
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		ConfigName.0 = Debug
+		ConfigName.1 = Release
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{A2E31074-9C2F-4484-A2C4-06A29B4306D0}.Debug.ActiveCfg = Debug|Win32
+		{A2E31074-9C2F-4484-A2C4-06A29B4306D0}.Debug.Build.0 = Debug|Win32
+		{A2E31074-9C2F-4484-A2C4-06A29B4306D0}.Release.ActiveCfg = Release|Win32
+		{A2E31074-9C2F-4484-A2C4-06A29B4306D0}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal
